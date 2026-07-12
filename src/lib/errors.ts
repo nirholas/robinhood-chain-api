@@ -14,13 +14,16 @@ export interface ApiErrorBody {
 
 const DOCS_BASE = 'https://nirholas.github.io/hood-api'
 
+/** Every HTTP status an ApiError can carry — a closed literal union so route handlers typecheck against `default`. */
+export type ApiErrorStatus = 400 | 401 | 404 | 451 | 500 | 502 | 503
+
 export class ApiError extends Error {
-  readonly status: number
+  readonly status: ApiErrorStatus
   readonly code: string
   readonly hint: string
   readonly docsPath: string
 
-  constructor(status: number, code: string, hint: string, docsPath = '/#errors') {
+  constructor(status: ApiErrorStatus, code: string, hint: string, docsPath = '/#errors') {
     super(`${code}: ${hint}`)
     this.name = 'ApiError'
     this.status = status
@@ -61,6 +64,22 @@ export class ApiError extends Error {
   static sessionInvalid(hint: string) {
     return new ApiError(401, 'session_invalid', hint, '/#firehose')
   }
+}
+
+/**
+ * Shared `defaultHook` for `OpenAPIHono` instances: turns a failed zod request
+ * validation (bad param/query) into the same `{ error, hint, docs }` shape as
+ * every other error path, instead of zod-openapi's raw `ZodError` JSON.
+ */
+export function apiValidationHook(
+  result: { success: true } | { success: false; error: { issues: Array<{ message: string; path: PropertyKey[] }> } },
+  c: { json: (body: ApiErrorBody, status: 400) => Response },
+) {
+  if (result.success) return
+  const first = result.error.issues[0]
+  const field = first?.path.join('.') || 'request'
+  const err = ApiError.badRequest(`Invalid ${field}: ${first?.message ?? 'validation failed'}`, 'invalid_request')
+  return c.json(err.toBody(), 400)
 }
 
 /** Convert any thrown value into an ApiError, mapping known SDK error names. */
