@@ -13,6 +13,7 @@ import { mainnetClient } from '../upstreams/rpc.js'
 import { ethPriceUsd } from './chain.js'
 import { getBulkDexStats, getCandles, getDexStats, type DexStats } from '../upstreams/dex.js'
 import * as blockscout from '../upstreams/blockscout.js'
+import { getMultiplier, getMultipliers } from './multipliers.js'
 
 function premium(dexUsd: number | null, chainlinkUsd: number | null): number | null {
   if (dexUsd === null || chainlinkUsd === null || chainlinkUsd === 0) return null
@@ -38,9 +39,10 @@ export async function listStocks() {
     const tokens = listStockTokens()
     const priced = tokens.filter((t) => t.feed !== null)
 
-    const [quotes, eth] = await Promise.all([
+    const [quotes, eth, multipliers] = await Promise.all([
       Promise.all(priced.map((t) => safeQuote(t.symbol))),
       ethPriceUsd(),
+      getMultipliers(),
     ])
     const quoteBySymbol = new Map<string, StockQuote | null>()
     priced.forEach((t, i) => quoteBySymbol.set(t.symbol, quotes[i] ?? null))
@@ -59,7 +61,7 @@ export async function listStocks() {
         feedUpdatedAt: q ? new Date(q.updatedAt * 1000).toISOString() : null,
         dexPriceUsd: d.priceUsd,
         premiumDiscount: premium(d.priceUsd, q?.priceUsd ?? null),
-        uiMultiplier: multiplierFloat(t.uiMultiplierAtGeneration),
+        uiMultiplier: (multipliers.get(t.symbol) ?? { float: multiplierFloat(t.uiMultiplierAtGeneration) }).float,
         liquidityUsd: d.liquidityUsd,
         pool: d.pool,
         feeTier: d.feeTier,
@@ -101,11 +103,12 @@ export async function getStockDetail(symbolRaw: string, interval: string) {
     const client = mainnetClient()
     const eth = await ethPriceUsd()
 
-    const [quote, dex, counters, candles] = await Promise.all([
+    const [quote, dex, counters, candles, multiplier] = await Promise.all([
       safeQuote(token.symbol),
       getDexStats(client, token.address as Address, eth).catch(() => emptyDex()),
       blockscout.getTokenCounters(token.address).catch(() => null),
       getCandles(client, token.address as Address, eth, { interval, lookbackBlocks: 900_000n }).catch(() => null),
+      getMultiplier(token.symbol),
     ])
 
     const source: string[] = [SOURCE.registry, SOURCE.chainlink, SOURCE.uniswap]
@@ -117,7 +120,7 @@ export async function getStockDetail(symbolRaw: string, interval: string) {
         name: token.name,
         address: token.address,
         decimals: token.decimals,
-        uiMultiplier: multiplierFloat(token.uiMultiplierAtGeneration),
+        uiMultiplier: multiplier.float,
         chainlink: quote
           ? {
               priceUsd: quote.priceUsd,

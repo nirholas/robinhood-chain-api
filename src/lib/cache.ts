@@ -50,6 +50,7 @@ export const TTL = {
   health: 2_000,
   chain: 10_000, // block height moves fast but 10s is plenty for stats
   stocks: 15_000, // Chainlink feeds update on market ticks; DEX mid on swaps
+  multipliers: 10 * 60_000, // ERC-8056 corporate actions are rare; income funds accrue daily
   stockDetail: 15_000,
   candles: 30_000,
   coins: 20_000,
