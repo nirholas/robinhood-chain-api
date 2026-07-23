@@ -1,6 +1,6 @@
 {
   "name": "hood-api",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Hosted market-data API for Robinhood Chain (chain ID 4663): Stock Tokens with Chainlink + DEX premium/discount, memecoin launchpads, multiplier-correct portfolios, cross-venue tokenized-equity spreads, and a real-time firehose. Free tier + x402-metered paid endpoints.",
   "keywords": [
     "robinhood",
@@ -21,11 +21,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nirholas/hood-api.git"
+    "url": "git+https://github.com/nirholas/robinhood-chain-api.git"
   },
-  "homepage": "https://nirholas.github.io/hood-api/",
+  "homepage": "https://nirholas.github.io/robinhood-chain-api/",
   "bugs": {
-    "url": "https://github.com/nirholas/hood-api/issues"
+    "url": "https://github.com/nirholas/robinhood-chain-api/issues"
   },
   "scripts": {
     "dev": "tsx watch src/index.ts",
