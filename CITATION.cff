@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it as below.
+title: "robinhood-chain-api"
+abstract: "Hosted market-data API for Robinhood Chain: Stock Tokens with Chainlink + DEX premium/discount, memecoin launchpads, portfolios, cross-venue spreads, real-time firehose. Free + x402-metered."
+repository-code: "https://github.com/nirholas/robinhood-chain-api"
+url: "https://three.ws"
+authors:
+  - name: three.ws
+    website: "https://three.ws"

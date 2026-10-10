@@ -1,0 +1,28 @@
+# robinhood-chain-api
+
+> Hosted market-data API for Robinhood Chain: Stock Tokens with Chainlink + DEX premium/discount, memecoin launchpads, portfolios, cross-venue spreads, real-time firehose. Free + x402-metered.
+
+robinhood-chain-api is an open-source repository by nirholas, part of the three.ws ecosystem.
+
+## Docs
+
+- [README](https://github.com/nirholas/robinhood-chain-api/blob/HEAD/README.md): install, usage and reference
+- [Why this exists](https://github.com/nirholas/robinhood-chain-api/blob/HEAD/README.md#why-this-exists)
+- [Endpoints](https://github.com/nirholas/robinhood-chain-api/blob/HEAD/README.md#endpoints)
+- [Quickstart](https://github.com/nirholas/robinhood-chain-api/blob/HEAD/README.md#quickstart)
+- [Architecture](https://github.com/nirholas/robinhood-chain-api/blob/HEAD/README.md#architecture)
+- [Local development](https://github.com/nirholas/robinhood-chain-api/blob/HEAD/README.md#local-development)
+- [Testing](https://github.com/nirholas/robinhood-chain-api/blob/HEAD/README.md#testing)
+- [Deploy](https://github.com/nirholas/robinhood-chain-api/blob/HEAD/README.md#deploy)
+- [Environment variables](https://github.com/nirholas/robinhood-chain-api/blob/HEAD/README.md#environment-variables)
+- [AGENTS.md](https://github.com/nirholas/robinhood-chain-api/blob/HEAD/AGENTS.md): guidance for coding agents
+- [Full text for LLMs](https://github.com/nirholas/robinhood-chain-api/blob/HEAD/llms-full.txt): the README inlined
+
+## Project
+
+- [Source](https://github.com/nirholas/robinhood-chain-api)
+- [Issues](https://github.com/nirholas/robinhood-chain-api/issues)
+- [Discussions](https://github.com/nirholas/robinhood-chain-api/discussions)
+- [Homepage](https://nirholas.github.io/robinhood-chain-api/)
+- [three.ws](https://three.ws): the platform this is part of
+- [All repositories by nirholas](https://github.com/nirholas/nirholas#readme)
