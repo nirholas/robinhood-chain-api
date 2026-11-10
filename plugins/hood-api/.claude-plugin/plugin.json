@@ -1,0 +1,17 @@
+{
+  "name": "hood-api",
+  "version": "0.1.1",
+  "description": "Market-data API for Robinhood Chain: Stock Token premiums, memecoin launchpads, portfolios and a live firehose, with x402 paid endpoints.",
+  "author": {
+    "name": "nirholas"
+  },
+  "repository": "https://github.com/nirholas/robinhood-chain-api",
+  "homepage": "https://nirholas.github.io/robinhood-chain-api/",
+  "keywords": [
+    "robinhood-chain",
+    "stock-tokens",
+    "market-data",
+    "x402",
+    "api"
+  ]
+}

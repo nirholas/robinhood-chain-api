@@ -1,0 +1,22 @@
+{
+  "name": "robinhood-chain-api",
+  "owner": {
+    "name": "nirholas"
+  },
+  "description": "Market-data API for Robinhood Chain: Stock Token premiums, memecoin launchpads, portfolios and a live firehose, with x402 paid endpoints.",
+  "plugins": [
+    {
+      "name": "hood-api",
+      "source": "./plugins/hood-api",
+      "description": "Market-data API for Robinhood Chain: Stock Token premiums, memecoin launchpads, portfolios and a live firehose, with x402 paid endpoints.",
+      "category": "data",
+      "tags": [
+        "robinhood-chain",
+        "stock-tokens",
+        "market-data",
+        "x402",
+        "api"
+      ]
+    }
+  ]
+}
